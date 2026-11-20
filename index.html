@@ -4,7 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="google" content="notranslate">
-<meta name="description" content="ഔദ്യോഗിക കത്തുകളും ഉത്തരവുകളും ഇ-ഓഫീസിലേക്കും വേർഡിലേക്കും പ്രിന്റിലേക്കും">
+<meta name="description" content="മംഗ്ലീഷിൽ ടൈപ്പ് ചെയ്യൂ. പ്രേഷകൻ, സ്വീകർത്താവ്, സ്ഥിരം വാചകങ്ങൾ ഒരിക്കൽ സേവ് ചെയ്താൽ കത്തും ഉത്തരവും സർക്കുലറും മിനിറ്റുകൾക്കുള്ളിൽ തയ്യാർ. ഇ-ഓഫീസിൽ പേസ്റ്റ് ചെയ്യാം, വേർഡ്/PDF ആക്കാം. സൗജന്യം.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ഇ-ലെറ്റർ (e Letter)">
+<meta property="og:locale" content="ml_IN">
+<meta property="og:title" content="ഇ-ലെറ്റർ — കത്തും ഉത്തരവും ഇ-ഓഫീസിലേക്ക് ഒറ്റ ക്ലിക്കിൽ">
+<meta property="og:description" content="മംഗ്ലീഷിൽ ടൈപ്പ് ചെയ്യൂ. പ്രേഷകൻ, സ്വീകർത്താവ്, സ്ഥിരം വാചകങ്ങൾ ഒരിക്കൽ സേവ് ചെയ്താൽ കത്തും ഉത്തരവും സർക്കുലറും മിനിറ്റുകൾക്കുള്ളിൽ തയ്യാർ. ഇ-ഓഫീസിൽ പേസ്റ്റ് ചെയ്യാം, വേർഡ്/PDF ആക്കാം. സൗജന്യം.">
+<meta property="og:url" content="https://eletter.sparktips.in/">
+<meta property="og:image" content="https://eletter.sparktips.in/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#1d5fae">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <!--
 Credits and licences
 - Font: Noto Sans Malayalam, Copyright 2022 The Noto Project Authors (https://github.com/notofonts/malayalam). Licensed under the SIL Open Font License, Version 1.1 (https://openfontlicense.org).
@@ -667,10 +681,10 @@ const SECS = [
   ["off", "🏢 ഓഫീസ്", ["motto", "dept", "office"]],
   ["adr", "📍 വിലാസം", ["place", "post", "dist", "pin", "email", "ph", "mob", "extra"], 1],
   ["snd", "📤 പ്രേഷകൻ", ["sender"]],
-  ["pfx", "🔢 ഫയൽ നമ്പർ", ["prefix"]],
   ["sig", "✒️ ഒപ്പ്", ["mode", "close", "name", "pen", "desig"]],
-  ["hds", "🧾 തലക്കെട്ട് രീതി", ["hdStyle"]],
   ["ord", "📜 ഉത്തരവ് (നടപടിക്രമം)", ["oTitle", "oPres"]],
+  ["pfx", "🔢 ഫയൽ നമ്പർ", ["prefix"]],
+  ["hds", "🧾 തലക്കെട്ട് രീതി", ["hdStyle"]],
   ["txt", "💬 സ്ഥിരം വാക്കുകളും വാചകങ്ങളും", ["stamps", "subChips", "chips", "sals", "snips", "enclChips", "ccChips"]],
   ["en", "🌐 English കത്തിന്", ["deptEn", "officeEn", "placeEn", "postEn", "distEn", "extraEn", "senderEn", "closeEn", "nameEn", "desigEn", "oTitleEn", "salsEn"], 1],
   ["look", "🔤 രൂപം", ["size", "hd", "margin", "gap", "theme", "pgNo"], 1],
@@ -683,9 +697,9 @@ const WZ = [
   ["ഓഫീസ്", "ഓഫീസിന്റെ പേര് നിർബന്ധമാണ്. കത്തിന്റെ തലക്കെട്ടിൽ ഇത് വരും.", ["motto", "dept", "office"]],
   ["വിലാസം", "“പോസ്റ്റ്”, “ജില്ല”, “പിൻ-” എന്നീ വാക്കുകൾ ആപ്പ് തനിയെ ചേർക്കും. സ്ഥലം, ജില്ല, പിൻ കോഡ്, ഇമെയിൽ/ഫോൺ (ഒന്നെങ്കിലും) നിർബന്ധം.", ["place", "post", "dist", "pin", "email", "ph", "mob", "extra"]],
   ["പ്രേഷകൻ", "കത്തിലെ “പ്രേഷകൻ” ഭാഗം. തസ്തിക, ഓഫീസ്, സ്ഥലം എന്നിവ നൽകുക. തസ്തികയും ഓഫീസ്/സ്ഥലവും നിർബന്ധമാണ്.", ["sender"]],
-  ["ഫയൽ നമ്പർ", "ഓഫീസിലെ ഫയൽ നമ്പറിന്റെ സാധാരണ തുടക്കം. ഓരോ കത്തിലും ഇത് തനിയെ വരും; കത്തിൽ മാറ്റാം.", ["prefix"]],
   ["ഒപ്പ്", "ഇ-ഓഫീസ് രീതിയിൽ പേരും തസ്തികയും തീയതിയും ഇ-ഓഫീസ് തന്നെ ചേർക്കും. തസ്തിക, ഓഫീസ്, സ്ഥലം എന്നിവയിൽ ഒന്നെങ്കിലും നൽകുക; പ്രിന്റ് രീതിയാണെങ്കിൽ പേരും വേണം.", ["mode", "close", "name", "pen", "desig"]],
-  ["ഉത്തരവ് (നടപടിക്രമം)", "ഉത്തരവിന്റെ മുകളിൽ വരുന്ന തലക്കെട്ട്. ആവശ്യാനുസരണം ഒന്നോ അതിലധികമോ വരികൾ ചേർക്കാം. ഓരോ ഉത്തരവിലും മാറ്റാം.", ["oTitle", "oPres"]]
+  ["ഉത്തരവ് (നടപടിക്രമം)", "ഉത്തരവിന്റെ മുകളിൽ വരുന്ന തലക്കെട്ട്. ആവശ്യാനുസരണം ഒന്നോ അതിലധികമോ വരികൾ ചേർക്കാം. ഓരോ ഉത്തരവിലും മാറ്റാം.", ["oTitle", "oPres"]],
+  ["ഫയൽ നമ്പർ", "ഓഫീസിലെ ഫയൽ നമ്പറിന്റെ സാധാരണ തുടക്കം. ഓരോ കത്തിലും ഇത് തനിയെ വരും; കത്തിൽ മാറ്റാം.", ["prefix"]]
 ];
 
 const STDREF = [
@@ -1327,6 +1341,7 @@ const hasC = c => !!(c && ((c.subject || "").trim() || lines(c.body).length || l
 const pack = () => ({ app: "kathezhuthu", v: 2, at: Date.now(), S: DB.S, R: DB.R, L: DB.L, T: DB.T, U: { ul: DB.U.ul } });
 
 function backup() {
+  if (!DB.S.setup && !DB.L.length && !DB.R.length) return toast("ബാക്കപ്പ് എടുക്കാൻ ഡാറ്റ ഒന്നും ഇല്ല", 1);
   dl(new Blob([JSON.stringify(pack())], { type: "application/json" }), "eLetter_Backup_" + fmt().replace(/\//g, "-") + ".json");
   DB.S.lastBk = Date.now();
   persist();
@@ -2577,7 +2592,7 @@ function hp(p, mode) {
   const r = p.r.map((r, i) => {
     if (r.br) return "<br>";
     // the number/bullet of a hanging item gets a fixed-width box, so justify never stretches the space after it
-    if (hang && !i) return `<span style="display:inline-block;width:${pt(-p.fi)};white-space:nowrap">${esc(r.x.trimEnd())}</span>`;
+    if (hang && !i) return `<span style="display:inline-block;width:${pt(-p.fi)};text-indent:0;white-space:nowrap">${esc(r.x.trimEnd())}</span>`;
     let s = esc(r.x);
     if (hl) s = s.replace(MK, m => "<mark>" + m + "</mark>");
     if (r.u) s = "<u>" + s + "</u>";
@@ -4060,13 +4075,13 @@ function wizCheck(i) {
     if (!desig) m.push(["sender", "പ്രേഷകന്റെ തസ്തിക"]);
     if (!office && !place) m.push(["sender", "ഓഫീസ് അല്ലെങ്കിൽ സ്ഥലം"]);
   }
-  if (i === 4) miss("prefix", "ഫയൽ നമ്പറിന്റെ തുടക്കം");
-  if (i === 5) {
+  if (i === 6) miss("prefix", "ഫയൽ നമ്പറിന്റെ തുടക്കം");
+  if (i === 4) {
     const d = String(S.desig || "").split("\n").map(x => x.trim()).filter(Boolean);
     if (!d.length) m.push(["desig", "തസ്തിക / ഓഫീസ് / സ്ഥലം എന്നിവയിൽ ഒന്നെങ്കിലും"]);
     if (S.mode === "print") miss("name", "പേര്");
   }
-  if (i === 6) {
+  if (i === 5) {
     const ot = String(S.oTitle || "").split("\n").map(x => x.trim()).filter(Boolean);
     if (!ot.length) m.push(["oTitle", "ഉത്തരവിന്റെ തലക്കെട്ട്"]);
   }
@@ -4133,14 +4148,16 @@ function mlHelp() {
 <div class="card"><h4>കൂടുതൽ സഹായി</h4><p>വാക്ക് ടൈപ്പ് ചെയ്യുമ്പോൾ വരുന്ന പോപ്പ്-അപ്പിൽ നിന്ന് <b>Arrow keys</b> വഴിയോ <b>1-9</b> അക്കങ്ങൾ വഴിയോ മറ്റ് നിർദ്ദേശങ്ങൾ തിരഞ്ഞെടുക്കാം.</p><p>മലയാളമായ ഉടൻ <b>Backspace</b> അമർത്തിയാൽ ടൈപ്പ് ചെയ്ത ഇംഗ്ലീഷ് വാക്ക് തിരികെ വരും. ഇംഗ്ലീഷ് തന്നെ വേണമെങ്കിൽ <b>Esc</b>. നിങ്ങൾ തിരഞ്ഞെടുക്കുന്ന വാക്കുകൾ ആപ്പ് ഓർത്തുവെക്കും (ബാക്കപ്പിലും ഉൾപ്പെടും).</p></div>`);
 }
 
-const helpHtml = () => `<div class="card"><h2>✉ ഇ-ലെറ്റർ (e Letter) – പതിപ്പ് ${VER}</h2>
+const helpHtml = () => `${DB.S.setup ? "" : `<div class="card"><h2>തുടങ്ങാം</h2><p>ഓഫീസിന്റെ പേരും വിലാസവും ഒരിക്കൽ നൽകിയാൽ മതി — അതിനു ശേഷമേ മറ്റ് ഭാഗങ്ങൾ തുറക്കൂ.</p><button type="button" class="btn" data-a="wzOpen">▶ ഓഫീസ് വിവരങ്ങൾ നൽകി തുടങ്ങുക</button></div>`}<div class="card"><h2>✉ ഇ-ലെറ്റർ (e Letter) – പതിപ്പ് ${VER}</h2>
 <p>കേരള സർക്കാർ ഓഫീസുകളിലെ കത്തുകൾ, ഉത്തരവുകൾ, സർക്കുലറുകൾ, കീഴെഴുത്തുകൾ എന്നിവ എളുപ്പത്തിലും വേഗത്തിലും തയ്യാറാക്കാനുള്ള ആപ്പാണിത്.</p></div>
 <div class="card"><h2>പ്രധാന സവിശേഷതകൾ</h2><ul>
+<li><b>⚡ ഒരിക്കൽ സേവ് ചെയ്താൽ മതി:</b> പ്രേഷകൻ, സ്വീകർത്താവ്, ഖണ്ഡികകൾ, ഉള്ളടക്കം, പകർപ്പ് എന്നിവയ്ക്കുള്ള സ്ഥിരം വാക്കുകളും വാചകങ്ങളും ഒരു തവണ സേവ് ചെയ്ത് വെച്ചാൽ പിന്നെ ഒരു ക്ലിക്ക് മതി — കത്തുകളും ഉത്തരവുകളും മിനിറ്റുകൾക്കുള്ളിൽ തയ്യാർ.</li>
+<li><b>🎨 സ്വന്തം ടെംപ്ലേറ്റ് ഇല്ലാത്ത ഓഫീസുകൾക്ക്:</b> ഇ-ഓഫീസിൽ സ്വന്തമായി ടെംപ്ലേറ്റ് ഇല്ലെങ്കിലും ഭംഗിയുള്ള, ക്രമമായ ഫോർമാറ്റിൽ കത്തുകളും ഉത്തരവുകളും സർക്കുലറുകളും കീഴെഴുത്തുകളും കുറിപ്പുകളും ഉണ്ടാക്കാം.</li>
 <li><b>ഇ-ഓഫീസ് അനുയോജ്യം:</b> ഒരു ക്ലിക്കിൽ കോപ്പി ചെയ്ത് ഇ-ഓഫീസിൽ പേസ്റ്റ് ചെയ്യാം.</li>
 <li><b>മംഗ്ലീഷ് ടൈപ്പിംഗ്:</b> സോഫ്റ്റ്‌വെയറുകൾ ഒന്നുമില്ലാതെ നേരിട്ട് മംഗ്ലീഷിൽ ടൈപ്പ് ചെയ്യാം.</li>
 <li><b>പട്ടികകൾ:</b> എക്സലിൽ നിന്ന് കോപ്പി ചെയ്ത് പേസ്റ്റ് ചെയ്യാം, നിരകളുടെ വീതി മാറ്റാം, സെല്ലുകൾ ലയിപ്പിക്കാം.</li>
 <li><b>വേർഡ് (.docx), PDF എക്സ്പോർട്ട്:</b> മൈക്രോസോഫ്റ്റ് വേർഡിലും ലിബ്രെഓഫീസിലും കൃത്യമായി തുറക്കാവുന്ന ഫയലുകൾ.</li>
-<li><b>പൂർണ്ണമായും ഓഫ്‌ലൈൻ:</b> ഇന്റർനെറ്റ് ആവശ്യമില്ല. വിവരങ്ങൾ കമ്പ്യൂട്ടറിൽ മാത്രം സൂക്ഷിക്കുന്നു.</li>
+<li><b>ഓഫ്‌ലൈനിലും പ്രവർത്തിക്കും:</b> ഒരിക്കൽ തുറന്നാൽ ഇന്റർനെറ്റ് ഇല്ലാതെയും ഉപയോഗിക്കാം. വിവരങ്ങൾ നിങ്ങളുടെ ഉപകരണത്തിൽ മാത്രം സൂക്ഷിക്കുന്നു.</li>
 </ul></div>
 <div class="card"><h2>പ്രത്യേകം ശ്രദ്ധിക്കാൻ</h2><ul>
 <li>കത്തിന് MANDARAM ഫോണ്ട് (Regular, Bold) കമ്പ്യൂട്ടറിൽ ഇൻസ്റ്റാൾ ചെയ്യണം. <a href="${FONT_URL}" target="_blank" rel="noopener">ഫോണ്ട് ഡൗൺലോഡ് പേജ്</a></li>
@@ -4177,6 +4194,8 @@ function pvUi() {
 
 function view(v, skipHist) {
   if (v === "letter" && !DB.S.setup) { wizard(0); return; }
+  // before the office is set up, only the Help page is open
+  if (!DB.S.setup && v !== "help") { toast("ആദ്യം ഓഫീസ് വിവരങ്ങൾ നൽകി തുടങ്ങുക", 1); v = "help"; }
   popHide();
   Q(".view").forEach(s => s.classList.toggle("on", s.id === "v-" + v));
   navHi();
@@ -5168,6 +5187,7 @@ $("setGrid").addEventListener("input", setIn);
 $("setGrid").addEventListener("change", setIn);
 $("wizBody").addEventListener("input", setIn);
 $("wizBody").addEventListener("change", setIn);
+$("wiz").addEventListener("close", () => { if (!DB.S.setup) view("help"); });
 $("wiz").addEventListener("cancel", e => {
   if (!DB.S.setup) e.preventDefault();
 });
@@ -5438,6 +5458,32 @@ if (REC) toast("പ്രധാന ഡാറ്റ കേടായിരുന�
 view(DB.S.setup ? "letter" : "help");
 if (DB.S.setup) askPersist();
 if (!DB.S.setup) wizard(0);
+
+
+/* === MODULE: pwa.js === */
+// Offline copy + "new version" notice. Active only when the app is served over http(s); a file opened from disk is unaffected.
+
+(() => {
+  if (!("serviceWorker" in navigator) || !/^https?:$/.test(location.protocol)) return;
+  let reload = false;
+  // The new version starts when the app is opened next time, or now if the user asks. The draft is saved first.
+  const notify = w => toast("പുതിയ പതിപ്പ് ലഭ്യമാണ്", 0, "പുതുക്കുക", () => {
+    try { read(); persistCur(); } catch (e) { /* the draft is also saved while typing */ }
+    reload = true;
+    w.postMessage("skip");
+  }, 60000);
+  navigator.serviceWorker.addEventListener("controllerchange", () => { if (reload) location.reload(); });
+  navigator.serviceWorker.register("sw.js").then(r => {
+    if (r.waiting && navigator.serviceWorker.controller) notify(r.waiting);
+    r.addEventListener("updatefound", () => {
+      const w = r.installing;
+      if (w) w.addEventListener("statechange", () => { if (w.state === "installed" && navigator.serviceWorker.controller) notify(w); });
+    });
+    const check = () => r.update().catch(() => { });
+    addEventListener("online", check);
+    setInterval(check, 36e5);
+  }).catch(() => { /* no service worker: the app still works online */ });
+})();
 
 
 })();
