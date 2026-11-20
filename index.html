@@ -1,9 +1,15 @@
 <!doctype html>
-<html lang="ml" data-theme="blue">
+<html lang="ml" translate="no" data-theme="blue">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google" content="notranslate">
 <meta name="description" content="ഔദ്യോഗിക കത്തുകളും ഉത്തരവുകളും ഇ-ഓഫീസിലേക്കും വേർഡിലേക്കും പ്രിന്റിലേക്കും">
+<!--
+Credits and licences
+- Font: Noto Sans Malayalam, Copyright 2022 The Noto Project Authors (https://github.com/notofonts/malayalam). Licensed under the SIL Open Font License, Version 1.1 (https://openfontlicense.org).
+- Manglish word list: derived (filtered, top 60,000 words) from "Malayalam-word-freq" by Kavya Manohar (https://huggingface.co/datasets/kavyamanohar/Malayalam-word-freq), built on AI4Bharat IndicCorp (https://indicnlp.ai4bharat.org). Licence: Creative Commons Attribution-NonCommercial 4.0 (https://creativecommons.org/licenses/by-nc/4.0/). Changes: filtered and re-ordered. Distributed free of charge.
+-->
 <title>ഇ-ലെറ്റർ | e Letter</title>
 <style>
 <style>@page{size:A4;margin:0}
@@ -51,7 +57,12 @@ nav{display:flex;align-items:center;flex-wrap:wrap;gap:3px 4px;width:100%;border
 
 /* one row only when logo + menu + buttons fit (decided by headerFit() in ui.js) */
 header.one{flex-wrap:nowrap;padding:0 14px;min-height:46px}
-header.one nav{width:auto;border-top:0;padding-top:0;flex-wrap:nowrap}
+header.one nav{width:auto;border-top:0;padding-top:0;flex-wrap:nowrap;order:1}
+header.one .hbs{order:2}
+/* wrapped header: logo + Manglish/?/Backup share the first row, the menu takes the second */
+header .logo{order:0}
+header .hbs{order:1}
+header nav{order:2}
 
 nav button{background:none;border:0;color:#fff;opacity:.88;padding:4px 10px;border-bottom:3px solid transparent;font-weight:700;white-space:nowrap;min-height:36px;font-size:13.5px;border-radius:4px 4px 0 0;transition:all .15s}
 /* Active nav item highlighted prominently in Yellow */
@@ -135,6 +146,16 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--acc);outline-off
 .ll+select,.ll+.chips+select{margin-top:7px}
 .btn{font-size:13.5px;font-weight:700;padding:6px 12px;border-radius:8px;border:1px solid var(--acc);background:var(--acc);color:#fff;white-space:nowrap;display:inline-block;position:relative;text-decoration:none}
 .btn.g{background:var(--card);color:var(--acc)}
+.btn.cp{background:#15803d;border-color:#15803d;color:#fff}
+.btn.cp:hover{background:#116a32}
+.credit{font-size:11.5px;margin:14px 2px 4px;color:var(--mut)}
+.chipsel{color:var(--mut)}
+.chipsel option{color:var(--tx)}
+/* thin scroll bars that stay visible (editor, preview, page) */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#9aa7b8;border-radius:6px;border:2px solid transparent;background-clip:content-box}
+::-webkit-scrollbar-thumb:hover{background:#6b7a90;background-clip:content-box;border:2px solid transparent}
 .btn.k{padding:4px 10px;font-size:12.5px}
 .btn.d{border-color:#e4b4ae;color:var(--bad);background:var(--card)}
 #saveBtn.dirty::after{content:"";position:absolute;top:-4px;right:-4px;width:11px;height:11px;border-radius:50%;background:#f5a300;border:2px solid var(--bg)}
@@ -153,7 +174,7 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--acc);outline-off
 .menu small{display:block;color:var(--mut);font-size:12px;font-weight:400}
 
 /* Warning & Alerts */
-#warn{background:var(--al);border:1px solid var(--alB);color:var(--alI);border-radius:10px;padding:8px 12px;font-size:13px;margin-bottom:7px}
+#warn{background:#fdeceb;border:1px solid #f08070;color:#b42318;border-radius:10px;padding:8px 12px;font-size:13px;font-weight:600;margin-bottom:7px}
 #warn:empty{display:none}
 #warn.bad-font{background:#fdeceb;border-color:#f08070;color:#b42318;font-weight:600}
 #warn .btn-font{display:inline-block;background:#b42318;color:#fff!important;padding:3px 10px;border-radius:6px;font-size:12.5px;font-weight:700;text-decoration:none;margin-left:8px;box-shadow:0 1px 3px rgba(0,0,0,0.25)}
@@ -242,6 +263,7 @@ dialog::backdrop{background:#0b1a2e99}
 #toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#1b2430;color:#fff;padding:10px 16px;border-radius:10px;font-size:13.5px;box-shadow:0 6px 20px #0004;opacity:0;pointer-events:none;transition:opacity .25s;max-width:92vw;z-index:50;display:flex;gap:12px;align-items:center}
 #toast.on{opacity:1;pointer-events:auto}
 #toast.err{background:#b42318}
+#toast.mid{top:50%;bottom:auto;transform:translate(-50%,-50%);font-size:16px;padding:16px 26px;text-align:center;justify-content:center;box-shadow:0 12px 44px #0007}
 #toast button{background:#fff;color:#1b2430;border:0;border-radius:7px;padding:5px 10px;font-weight:700;white-space:nowrap}
 
 .fmb,.tbt{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
@@ -270,8 +292,6 @@ table.te{width:100%;border-collapse:collapse;table-layout:fixed}
 #ft a{color:inherit;text-decoration:none}
 #ft a:hover{text-decoration:underline}
 #printArea{display:none;position:relative}
-.ptb{width:100%;border-collapse:collapse}
-.ptb td{padding:0;vertical-align:top}
 
 @keyframes pulseHighlight{
   0%{box-shadow:0 0 0 4px #facc15;background-color:#fef9c3}
@@ -308,10 +328,12 @@ table.te{width:100%;border-collapse:collapse;table-layout:fixed}
   .stage{max-height:none;padding:8px;display:flex;justify-content:center;align-items:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch}
   .paper{transform-origin:top center}
   .c2,.c21,.c31,.acc .g2,.s3{grid-template-columns:1fr}
-  nav{width:100%;margin:0;order:9}
+  nav{width:100%;margin:0}
   header{padding:6px 10px 0}
   .logo,.hbs{min-height:36px}
   .hb{padding:3px 8px;font-size:12.5px}
+  .bkt{display:none}
+  .logo{max-width:calc(100vw - 210px)}
   .wrap{padding:12px}
   #pvBtn{display:none}
 
@@ -335,7 +357,7 @@ table.te{width:100%;border-collapse:collapse;table-layout:fixed}
   <div class="logo"><i>✉</i><span class="lt">ഇ-ലെറ്റർ<small id="offName"></small></span></div>
   <nav><button data-v="letter">✍️ കത്ത്</button><button data-v="order">📜 ഉത്തരവ്</button><button data-v="circular">📢 സർക്കുലർ</button><button data-v="endorse">↪️ കീഴെഴുത്ത്</button><button data-v="note">📝 കുറിപ്പ്</button><button data-v="rec">👥 സ്വീകർത്താക്കൾ</button><button data-v="saved">📁 സേവ് ചെയ്തവ</button><button data-v="set">⚙️ ക്രമീകരണങ്ങൾ</button><button data-v="help">❓ സഹായം</button></nav>
   <div class="hbs"><button class="hb" id="mlBtn" data-a="ml" title="മംഗ്ലീഷ് ഓൺ/ഓഫ് (Ctrl+M)" aria-pressed="false">മംഗ്ലീഷ്: ഓഫ്</button><button class="hb" data-a="mlHelp" title="മംഗ്ലീഷ് എങ്ങനെ">?</button>
-  <button class="hb" id="bkBtn" data-a="backup" title="മുഴുവൻ ബാക്കപ്പ്">⤓ ബാക്കപ്പ്</button></div>
+  <button class="hb" id="bkBtn" data-a="backup" title="മുഴുവൻ ബാക്കപ്പ്" aria-label="ബാക്കപ്പ്">⤓<span class="bkt"> ബാക്കപ്പ്</span></button></div>
 </header>
 </div>
 
@@ -375,7 +397,7 @@ table.te{width:100%;border-collapse:collapse;table-layout:fixed}
       </div>
     </div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin:6px 0 10px">
-      <button type="button" class="link" id="addNextRecBtn" style="font-size:13px;font-weight:600">＋ അടുത്ത സ്വീകർത്താവിനെ ചേർക്കുക</button>
+      <button type="button" class="link" id="addNextRecBtn" style="font-size:13px;font-weight:600">+ അടുത്ത സ്വീകർത്താവിനെ ചേർക്കുക</button>
       <button type="button" class="link" id="addRec" style="font-size:12.5px">+ ഈ വിലാസം പട്ടികയിൽ ചേർക്കുക</button>
     </div>
     <div class="chips" id="recChips"></div>
@@ -398,16 +420,16 @@ table.te{width:100%;border-collapse:collapse;table-layout:fixed}
 <div class="split" id="split" title="വലിച്ച് വീതി മാറ്റാം"></div>
 <div class="pv">
   <div id="actP"><div class="acts" id="acts">
-    <button class="btn g" data-a="newL" title="പുതിയതും ഒഴിഞ്ഞതുമായ കത്ത് തുടങ്ങുക">＋ പുതിയ കത്ത്</button>
+    <button class="btn g" data-a="newL" title="പുതിയതും ഒഴിഞ്ഞതുമായ കത്ത് തുടങ്ങുക">+ പുതിയ കത്ത്</button>
     <button class="btn" id="saveBtn" data-a="save" title="Ctrl+S">💾 സേവ്</button>
     <button class="btn g" id="undoBtn" data-a="undoAction" title="അൺഡൂ (Ctrl+Z)">↶</button>
     <button class="btn g" id="redoBtn" data-a="redoAction" title="റീഡൂ (Ctrl+Y)">↷</button>
     <button class="btn g" data-a="mktplCur">📄 മാതൃകയായി സേവ് ചെയ്യുക</button>
     <button class="btn g" data-a="find" title="Ctrl+F അല്ലെങ്കിൽ കണ്ടെത്തുക">🔍 കണ്ടെത്തുക</button>
     <button class="btn g" id="mergeBtn" data-a="merge" title="ഒരേ കത്ത് പല സ്വീകർത്താക്കൾക്ക്">📨 പലർക്ക്</button>
-    <button class="btn" data-a="copy">📋 ഇ-ഓഫീസിലേക്ക് കോപ്പി</button>
+    <button class="btn cp" data-a="copy">📋 ഇ-ഓഫീസിലേക്ക് കോപ്പി</button>
     <button class="btn g" data-a="docx">W വേർഡ്</button>
-    <button class="btn g" data-a="pdf" title="പ്രിന്റ് പ്രിവ്യൂ / PDF (Ctrl+P)">🖨 പ്രിന്റ് പ്രിവ്യൂ</button>
+    <button class="btn g" data-a="pdf" title="പ്രിന്റ് / PDF (Ctrl+P) — PDF-ന്: Save as PDF">🖨 പ്രിന്റ് / PDF</button>
     <details class="menu"><summary class="btn d">🗑 മായ്ക്കുക ▾</summary><div><button data-a="clr" data-id="c">ഉള്ളടക്കം മാത്രം മായ്ക്കുക<small>സ്വീകർത്താവും നമ്പറും നിലനിർത്തി പുതിയ കത്ത്</small></button><button data-a="clr" data-id="a">എല്ലാം മായ്ക്കുക<small>പൂർണ്ണമായും ഒഴിഞ്ഞ പുതിയ കത്ത്</small></button><button data-a="dup">⧉ ഇതുപോലെ പുതിയ കത്ത്<small>എല്ലാം പകർത്തി, സേവ് ചെയ്യാത്ത പുതിയ കത്ത്</small></button><button data-a="rev" id="revBtn">↺ സേവ് ചെയ്തതിലേക്ക് മടങ്ങുക<small>ഇപ്പോഴത്തെ മാറ്റങ്ങൾ ഒഴിവാക്കുക</small></button></div></details>
     <button class="btn g" id="pvBtn" data-a="pvt"></button>
     <span class="zg"><button class="ib" data-a="zoom" data-id="-1" title="ചെറുതാക്കുക">−</button><span id="zl"></span><button class="ib" data-a="zoom" data-id="1" title="വലുതാക്കുക">+</button><button class="link" data-a="zoom" data-id="0">ഫിറ്റ്</button></span>
@@ -435,7 +457,7 @@ table.te{width:100%;border-collapse:collapse;table-layout:fixed}
       <input id="rq" placeholder="🔍 തിരയുക…" aria-label="തിരയുക">
     </div>
     <div id="rlist"></div>
-    <div class="p12"><button class="btn" id="rnew" style="width:100%">＋ പുതിയ സ്വീകർത്താവ്</button></div>
+    <div class="p12"><button class="btn" id="rnew" style="width:100%">+ പുതിയ സ്വീകർത്താവ്</button></div>
   </div>
   <div>
     <div class="card" id="redit" hidden><h3>സ്വീകർത്താവ്</h3>
@@ -972,7 +994,7 @@ function toast(m, e, act, fn, ms) {
     b.onclick = () => { t.className = ""; clearTimeout(tt); fn(); };
     t.append(b);
   }
-  t.className = "on" + (e ? " err" : "");
+  t.className = "on" + (e ? " err" : "") + (act ? "" : " mid");
   clearTimeout(tt);
   tt = setTimeout(() => t.className = "", ms || (act ? 10000 : e ? 6000 : 3500));
 }
@@ -1305,7 +1327,7 @@ const hasC = c => !!(c && ((c.subject || "").trim() || lines(c.body).length || l
 const pack = () => ({ app: "kathezhuthu", v: 2, at: Date.now(), S: DB.S, R: DB.R, L: DB.L, T: DB.T, U: { ul: DB.U.ul } });
 
 function backup() {
-  dl(new Blob([JSON.stringify(pack())], { type: "application/json" }), "ഇ-ലെറ്റർ_ബാക്കപ്പ്_" + fmt().replace(/\//g, "-") + ".json");
+  dl(new Blob([JSON.stringify(pack())], { type: "application/json" }), "eLetter_Backup_" + fmt().replace(/\//g, "-") + ".json");
   DB.S.lastBk = Date.now();
   persist();
   if ($("v-saved").classList.contains("on")) renderSaved();
@@ -1868,11 +1890,20 @@ const jfit = (t, w, sz) => {
     const a = mw(x, sz);
     if (!n) { u = a; n = 1; }
     else if (u + sp + a > w) {
-      if (n > 1 && (w - u) / (n - 1) > sp * 1.5) return false;
+      if (n > 1 && (w - u) / (n - 1) > sp * 3) return false;
       u = a; n = 1;
     } else { u += sp + a; n++; }
   }
   return true;
+};
+
+// A row's sb becomes the sa of the row above, so gaps are plain paragraph margins everywhere
+const gapRows = rows => {
+  rows.forEach((r, i) => {
+    if (i && r.sb) { const p = rows[i - 1].ps[rows[i - 1].ps.length - 1]; p.sa = Math.max(p.sa || 0, r.sb); }
+    delete r.sb;
+  });
+  return rows;
 };
 
 const cm = a => a.map((x, i) => i < a.length - 1 ? (/,$/.test(x) ? x : x.replace(/[.;]+$/, "") + ",") : x.replace(/,+$/, ""));
@@ -1990,10 +2021,10 @@ function build(d, o) {
       t: "tbl",
       w: LW,
       cw: CC,
-      rows: [
+      rows: gapRows([
         { lab: L.sub, ps: [jf(P(inl(String(d.subject || "").replace(/\s*\n\s*/g, " ")), { fk: "subject" }))] },
         { lab: cir ? L.ref2 : L.ref, sb: G, ps: refs.length ? nl(refs, "refs").map(jf) : Array.from({ length: S.refBl == 2 ? 2 : 1 }, () => P("_".repeat(32), { fk: "refs" })) }
-      ]
+      ])
     });
   }
 
@@ -2042,9 +2073,9 @@ function build(d, o) {
 
   const tl2 = [];
   if (e.length) tl2.push({ lab: L.enc, ps: nl(e, "encl") });
-  if (rcx && !not && r.length) tl2.push({ lab: L.rc, ps: nl(r, "rcpt"), sb: G });
-  if (c.length) tl2.push({ lab: L.cc, ps: nl(c, "cc"), sb: rcx ? G : tl2.length ? G2 : 0 });
-  if (tl2.length) N.push({ t: "tbl", w: LW2, cw: CC, rows: tl2 });
+  if (rcx && !not && r.length) tl2.push({ lab: L.rc, ps: nl(r, "rcpt"), sb: tl2.length ? G2 : 0 });
+  if (c.length) tl2.push({ lab: L.cc, ps: nl(c, "cc"), sb: tl2.length ? G2 : 0 });
+  if (tl2.length) N.push({ t: "tbl", w: LW2, cw: CC, rows: gapRows(tl2) });
 
   return N;
 }
@@ -2492,8 +2523,8 @@ function bodySnip(t) {
   fire(ed);
 }
 
-// Index of the paragraph (counting text paragraphs only) — used for table positions
-const bodyTextIdx = p => bodyParas().filter(x => !isPB(x) && paraGet(x)).indexOf(p);
+// Number of text paragraphs up to and including p (an empty paragraph counts as the text above it) — used for table positions
+const bodyTextCnt = p => { const ps = bodyParas(), k = ps.indexOf(p); return k < 0 ? -1 : ps.slice(0, k + 1).filter(x => !isPB(x) && paraGet(x)).length; };
 
 // Drag & drop: chips and outside text are inserted as plain text at the drop point.
 // Text dragged WITHIN the same box is left to the browser, so it moves instead of being copied.
@@ -2542,8 +2573,11 @@ function hp(p, mode) {
   const isRedStamp = p.fk === "stamp" && (p.red || (p.r && p.r.some(x => x.color === "D32F2F")));
   const isSingleLineMeta = p.fk === "fileNo" || p.fk === "date";
   const st = `${FF};font-size:${sz}pt;line-height:${LHc(p)};color:${isRedStamp ? "#d32f2f" : "#000"};margin:${pt(p.sb)} 0 ${pt(p.sa)} ${pt(p.l)};${p.fi ? "text-indent:" + pt(p.fi) + ";" : ""}text-align:${JC[p.jc] || "left"};${p.brd ? "border-bottom:3px double #000;padding-bottom:3pt;" : ""}${isSingleLineMeta ? "white-space:nowrap;" : ""}`;
-  const r = p.r.map(r => {
+  const hang = p.hg && p.fi < 0 && p.r.length > 1;
+  const r = p.r.map((r, i) => {
     if (r.br) return "<br>";
+    // the number/bullet of a hanging item gets a fixed-width box, so justify never stretches the space after it
+    if (hang && !i) return `<span style="display:inline-block;width:${pt(-p.fi)};white-space:nowrap">${esc(r.x.trimEnd())}</span>`;
     let s = esc(r.x);
     if (hl) s = s.replace(MK, m => "<mark>" + m + "</mark>");
     if (r.u) s = "<u>" + s + "</u>";
@@ -2609,8 +2643,7 @@ function html(N, mode) {
 
       h = `<table width="100%" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;table-layout:fixed;margin:2pt 0"><colgroup><col style="width:${wCol}"><col style="width:${kCol}"><col style="width:${cCol}"></colgroup>${n.rows.map(r => {
         const fk = r.ps[0].fk;
-        const padTop = r.sb ? `padding-top:${pt(r.sb)};` : "";
-        return `<tr><td width="${wCol}" style="padding:0;${padTop}vertical-align:top;width:${wCol};white-space:nowrap">${hp(P(r.lab, { sb: isCp ? 0 : r.sb, fk }), mode)}</td><td width="${kCol}" style="padding:0 2pt;${padTop}vertical-align:top;width:${kCol};text-align:center">${hp(P(":", { sb: isCp ? 0 : r.sb, fk, l: Math.round(mw(" ", num("size")) * 20) }), mode)}</td><td style="padding:0;${padTop}vertical-align:top">${r.ps.map((p, i) => hp(i ? p : Object.assign({}, p, { sb: isCp ? 0 : r.sb }), mode)).join("")}</td></tr>`;
+        return `<tr><td width="${wCol}" style="padding:0;vertical-align:top;width:${wCol};white-space:nowrap">${hp(P(r.lab, { fk }), mode)}</td><td width="${kCol}" style="padding:0 2pt;vertical-align:top;width:${kCol};text-align:center">${hp(P(":", { fk, l: Math.round(mw(" ", num("size")) * 20) }), mode)}</td><td style="padding:0;vertical-align:top">${r.ps.map(p => hp(p, mode)).join("")}</td></tr>`;
       }).join("")}</table>`;
     }
     if (n.kg) kg += h; else { flush(); o += h; }
@@ -2643,9 +2676,9 @@ function fitN(d) {
       pr.innerHTML = html(X, "pr");
       const h = pr.offsetHeight, pg = Math.ceil(h/H - .001);
       if (!i) {
-        p0 = pg; N.pg = Math.ceil(h/H - .03); if (pg < 2) break;
+        p0 = pg; N.pg = Math.ceil(h/H - .03); N.fl = h / H; if (pg < 2) break;
       } else if (pg < p0) {
-        X.pg = Math.ceil(h/H - .03); N = X; break;
+        X.pg = Math.ceil(h/H - .03); X.fl = h / H; N = X; break;
       }
     }
   } finally {
@@ -2700,13 +2733,18 @@ async function doCopy() {
 function doPdf(list) {
   if (!list && !valid()) return;
   const m = num("margin"), a = $("printArea"), t = document.title, ls = list || [cur], Ns = ls.map(c => fitN(c)), N0 = Ns[0];
-  const pn = !list && DB.S.pgNo && N0.pg > 1 ? Array.from({ length: N0.pg }, (_, k) => `<div style="position:absolute;left:0;width:100%;text-align:center;top:calc(${k + 1}*297mm - ${m / 2 + .25}cm);font:10pt 'Mandaram','MANDARAM',serif;color:#000">പേജ് ${k + 1} / ${N0.pg}</div>`).join("") : "";
-  a.innerHTML = `<table class="ptb"><thead><tr><td style="height:${m}cm"></td></tr></thead><tfoot><tr><td style="height:${m}cm"></td></tr></tfoot><tbody><tr><td style="padding:0 ${m}cm">${Ns.map(N => html(N, "pr")).join('<div style="break-after:page;page-break-after:always;height:0"></div>')}</td></tr></tbody></table>${pn}`;
+  // Page margins and the "page n / N" footer come from the browser's own @page rules, so the numbers always match the real pages
+  const pn = !list && DB.S.pgNo && (N0.pg > 1 || N0.fl > .85); // near-full single page: the estimate can be one page short
+  const st = document.createElement("style");
+  st.textContent = `@page{size:A4;margin:${m}cm${pn ? `;@bottom-center{content:"പേജ് " counter(page) " / " counter(pages);font:10pt 'Mandaram','MANDARAM',serif;color:#000;vertical-align:middle}` : ""}}`;
+  document.head.append(st);
+  a.innerHTML = Ns.map(N => html(N, "pr")).join('<div style="break-after:page;page-break-after:always;height:0"></div>');
   document.title = fname();
   document.body.classList.add("prt");
   addEventListener("afterprint", () => {
     document.title = t;
     a.innerHTML = "";
+    st.remove();
     document.body.classList.remove("prt");
   }, { once: true });
   setTimeout(() => {
@@ -3201,7 +3239,7 @@ function initTableEvents() {
 Object.assign(A, {
   tblAdd: () => {
     read();
-    const i = lastBody && document.contains(lastBody) ? bodyTextIdx(lastBody) : -1, t = newTbl(i < 0 ? 99 : i + 1);
+    const n = lastBody && document.contains(lastBody) ? bodyTextCnt(lastBody) : -1, t = newTbl(n < 0 ? 99 : n);
     (cur.tables = cur.tables || []).push(t);
     renderTables();
     changed();
@@ -3667,7 +3705,7 @@ function chipBuild() {
         if (c) c.click();
       };
     }
-    s.innerHTML = `<option value="">＋ പട്ടികയിൽ നിന്ന് തിരഞ്ഞെടുക്കുക… (എല്ലാം)</option>` + Q(".chip", b).map((c, i) => `<option value="${i}">${esc(c.textContent.replace(/^\+\s*/, ''))}</option>`).join("");
+    s.innerHTML = `<option value="">+ പട്ടികയിൽ നിന്ന് തിരഞ്ഞെടുക്കുക… (എല്ലാം)</option>` + Q(".chip", b).map((c, i) => `<option value="${i}">${esc(c.textContent.replace(/^\+\s*/, ''))}</option>`).join("");
   });
   chipFit();
 }
@@ -3991,10 +4029,12 @@ function persistInfo() {
   }).catch(() => { });
 }
 
+const CREDITS = `<p class="note credit">മംഗ്ലീഷ് വാക്കുപട്ടിക: <a href="https://huggingface.co/datasets/kavyamanohar/Malayalam-word-freq" target="_blank" rel="noopener">Kavya Manohar</a> / <a href="https://indicnlp.ai4bharat.org" target="_blank" rel="noopener">AI4Bharat IndicCorp</a> (<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>, ഫിൽട്ടർ ചെയ്തത്) · ഫോണ്ട്: Noto Sans Malayalam © The Noto Project Authors (<a href="https://openfontlicense.org" target="_blank" rel="noopener">SIL OFL 1.1</a>)</p>`;
+
 function renderSet() {
   const op = DB.U.op || ["off"], si = snapInfo();
   const BK = `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn" data-a="backup">⤓ മുഴുവൻ ബാക്കപ്പ്</button><button class="btn g" data-a="restore">⤒ ഫയൽ തിരികെ ചേർക്കുക</button><button class="btn g" data-a="export">⤓ ക്രമീകരണങ്ങൾ മാത്രം (മറ്റ് ഓഫീസിന്)</button><button class="btn g" data-a="wzOpen">🧭 ആദ്യ ക്രമീകരണ വിസാർഡ് വീണ്ടും തുറക്കുക</button></div><p class="note">“ക്രമീകരണങ്ങൾ മാത്രം” ഫയലിൽ ഓഫീസ് വിവരം, സ്വീകർത്താക്കൾ, മാതൃകകൾ എന്നിവ ഉണ്ടാകും; കത്തുകൾ ഉണ്ടാകില്ല. പഴയ പതിപ്പിന്റെ (v1) ബാക്കപ്പും ചേർക്കാം.</p><p class="note" id="persistNote"></p><p class="note">കത്തുകൾ ഈ കമ്പ്യൂട്ടറിലെ ഈ ബ്രൗസറിൽ മാത്രമാണ്; ഒരിടത്തേക്കും അയയ്ക്കുന്നില്ല. ആഴ്ചയിൽ ഒരിക്കൽ ബാക്കപ്പ് എടുക്കുക. ${DB.S.lastBk ? "അവസാന ബാക്കപ്പ്: " + fmt(DB.S.lastBk) : "ഇതുവരെ ബാക്കപ്പ് എടുത്തിട്ടില്ല."}</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">${si ? `<button class="btn g k" data-a="recover">⟲ ${si}-ലെ പകർപ്പിലേക്ക് മടങ്ങുക</button>` : ""}<button class="btn d k" data-a="wipe">⚠️ ഈ ബ്രൗസറിലെ എല്ലാ ഡാറ്റയും മായ്ക്കുക</button></div>`;
-  $("setGrid").innerHTML = `<p class="note" style="margin:0 0 10px">ഓരോ വരിയിലും ക്ലിക്ക് ചെയ്താൽ തുറക്കും. മാറ്റങ്ങൾ തനിയെ സേവ് ആകും.</p>` + SECS.map(s => `<details class="acc" data-s="${s[0]}"${op.includes(s[0]) ? " open" : ""}><summary>${s[1]}${sumOf(s)}</summary><div${s[3] ? ' class="g2"' : ""}>${s[2] ? s[2].map(k => `<div${FD[k][1] === "s3" || FD[k][1] === "hs" || (FD[k][1] === "ll" || FD[k][1] === "llx") && !["email", "ph", "mob"].includes(k) ? ' style="grid-column:1/-1"' : ""}>${fld(k)}</div>`).join("") : BK}</div></details>`).join("");
+  $("setGrid").innerHTML = `<p class="note" style="margin:0 0 10px">ഓരോ വരിയിലും ക്ലിക്ക് ചെയ്താൽ തുറക്കും. മാറ്റങ്ങൾ തനിയെ സേവ് ആകും.</p>` + SECS.map(s => `<details class="acc" data-s="${s[0]}"${op.includes(s[0]) ? " open" : ""}><summary>${s[1]}${sumOf(s)}</summary><div${s[3] ? ' class="g2"' : ""}>${s[2] ? s[2].map(k => `<div${FD[k][1] === "s3" || FD[k][1] === "hs" || (FD[k][1] === "ll" || FD[k][1] === "llx") && !["email", "ph", "mob"].includes(k) ? ' style="grid-column:1/-1"' : ""}>${fld(k)}</div>`).join("") : BK}</div></details>`).join("") + CREDITS;
   initLL($("setGrid"));
   persistInfo();
   Q("#setGrid .acc").forEach(d => d.addEventListener("toggle", () => {
@@ -4107,8 +4147,7 @@ const helpHtml = () => `<div class="card"><h2>✉ ഇ-ലെറ്റർ (e Lett
 <li>പ്രിന്റ് ചെയ്യുമ്പോൾ Margins: Default, Scale: 100.</li>
 <li>ഡിലീറ്റ് ചെയ്തവ 30 ദിവസം 📁 സേവ് ചെയ്തവ → റീസൈക്കിൾ ബിൻ-ൽ ഉണ്ടാകും.</li>
 <li>ആഴ്ചയിൽ ഒരിക്കൽ ⤓ ബാക്കപ്പ് എടുക്കുക.</li>
-</ul></div>
-<div class="card"><h2>ലൈസൻസ്</h2><p class="note">ആപ്പിന്റെ മെനു ഫോണ്ട്: Noto Sans Malayalam — Copyright 2022 The Noto Project Authors (github.com/notofonts/malayalam), SIL Open Font License 1.1 പ്രകാരം ഉൾപ്പെടുത്തിയത്. കത്തിനുള്ള MANDARAM ഫോണ്ട് ഈ ഫയലിൽ ഉൾപ്പെടുത്തിയിട്ടില്ല.</p><p class="note">മംഗ്ലീഷ് നിഘണ്ടു (ഏറ്റവും കൂടുതൽ ഉപയോഗിക്കുന്ന 60,000 മലയാളം വാക്കുകൾ): Kavya Manohar തയ്യാറാക്കിയ “Malayalam-word-freq” (huggingface.co/datasets/kavyamanohar/Malayalam-word-freq), AI4Bharat IndicCorp-ൽ (indicnlp.ai4bharat.org) നിന്ന് — Creative Commons BY-NC 4.0 പ്രകാരം, വാണിജ്യേതര ഉപയോഗത്തിന് മാത്രം. ഇ-ലെറ്റർ സൗജന്യമായാണ് വിതരണം ചെയ്യുന്നത്.</p></div>`;
+</ul></div>`;
 
 function renderHelp() { $("helpBox").innerHTML = helpHtml(); }
 function theme() { document.documentElement.dataset.theme = ["blue", "green", "gray"].includes(DB.S.theme) ? DB.S.theme : "blue"; }
@@ -4303,7 +4342,7 @@ Object.assign(A, {
   zoom: d => { d = +d; DB.U.zoom = d ? Math.min(2, Math.max(.3, Math.round((zf + d * .1) * 10) / 10)) : 0; persist(); fit(); },
   pvt: () => { DB.U.nopv = !DB.U.nopv; persist(); pvUi(); if (!DB.U.nopv) preview(); },
   restore: () => $("fileIn").click(),
-  export: () => dl(new Blob([JSON.stringify({ app: "kathezhuthu", v: 2, S: Object.assign({}, DB.S, { lastBk: 0, snapAt: 0 }), R: DB.R, L: DB.L.filter(x => x.tpl) })], { type: "application/json" }), "ഇ-ലെറ്റർ_ക്രമീകരണങ്ങൾ.json"),
+  export: () => dl(new Blob([JSON.stringify({ app: "kathezhuthu", v: 2, S: Object.assign({}, DB.S, { lastBk: 0, snapAt: 0 }), R: DB.R, L: DB.L.filter(x => x.tpl) })], { type: "application/json" }), "eLetter_Settings.json"),
   open: id => load(byId(id)),
   copyL: id => load(byId(id), 1) && toast("പകർപ്പ് തയ്യാർ — മാറ്റങ്ങൾ വരുത്തി സേവ് ചെയ്യുക"),
   use: id => load(byId(id), 1) && toast("മാതൃക തുറന്നു — മഞ്ഞ ഭാഗങ്ങൾ പൂരിപ്പിക്കുക"),
@@ -4322,7 +4361,7 @@ Object.assign(A, {
   },
   xtpl: id => {
     const x = byId(id);
-    dl(new Blob([JSON.stringify({ app: "kathezhuthu", v: 2, L: [x] })], { type: "application/json" }), "മാതൃക_" + x.name.replace(/[\\/:*?"<>|\s]+/g, "-").slice(0, 40) + ".json");
+    dl(new Blob([JSON.stringify({ app: "kathezhuthu", v: 2, L: [x] })], { type: "application/json" }), "eLetter_Template_" + (rom(x.name).replace(/[^A-Za-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "template") + ".json");
   },
   del: id => {
     const x = byId(id);
@@ -4414,7 +4453,7 @@ Object.assign(A, {
   },
   words: () => {
     if (!lastTA || !document.contains(lastTA)) lastTA = bodyTA();
-    if (lastTA) lastTASel = { start: lastTA.selectionStart ?? lastTA.value.length, end: lastTA.selectionEnd ?? lastTA.value.length };
+    if (lastTA && !isCE(lastTA)) lastTASel = { start: lastTA.selectionStart ?? lastTA.value.length, end: lastTA.selectionEnd ?? lastTA.value.length };
     WDV = {};
     dlg(`<h2>₹ തുക അക്ഷരത്തിൽ</h2><label for="wdN">തുക (രൂപ)</label><input id="wdN" inputmode="decimal" data-noml autocomplete="off" placeholder="ഉദാ: 25000 അല്ലെങ്കിൽ 1250.50"><div class="words" id="wdM"></div><div class="words" id="wdE"></div><div class="bar"><button class="btn" data-a="wdIns" data-id="m">മലയാളം ചേർക്കുക</button><button class="btn g" data-a="wdIns" data-id="e">English ചേർക്കുക</button></div><p class="note">മലയാള വാക്കുകൾ ഒരു തവണ വായിച്ച് ഉറപ്പാക്കുക.</p>`);
     $("wdN").oninput = wdShow;
